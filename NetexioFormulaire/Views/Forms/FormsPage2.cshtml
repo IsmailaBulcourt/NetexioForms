@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Formulaire";
+}
+<h1>@ViewData["Title"]</h1>
+<p>Page du formulaire</p>
+<div class="container">
+    <div class="row">
+        <h2>Le Formateur</h2>
+    </div>
+    <div class="row">
+        <label>Maitrise du sujet:</label>
+    </div>
+    <div class="row">
+        @for (var i = 1; i <= 10; i++)
+        {
+            <input name="AreChecked" type="checkbox" value="@i" /> @i <br />
+        }
+    </div>
+
+    <div class="row">
+        <label>Qualités de communication et pédagogie:</label>
+    </div>
+    <div class="row">
+        @for (var i = 1; i <= 10; i++)
+        {
+            <input name="AreChecked" type="checkbox" value="@i" /> @i <br />
+        }
+    </div>
+
+    <div class="row">
+        <label>Ecoute et disponibilité:</label>
+    </div>
+    <div class="row">
+        @for (var i = 1; i <= 10; i++)
+        {
+            <input name="AreChecked" type="checkbox" value="@i" /> @i <br />
+        }
+    </div>
+
+    <div class="row">
+        <label>Aimeriez vous participer à d'autres formations? si oui merci de nous lister les thèmes</label>
+    </div>
+    <div class="container">
+        <input type="text" size="100" />
+    </div>
+
+    <div class="row">
+        <label>Commentaires généraux</label>
+    </div>
+    <div class="container">
+        <input type="text" size="100" />
+    </div>
+</div>

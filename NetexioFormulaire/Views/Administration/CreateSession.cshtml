@@ -1,6 +1,9 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model Tuple<System.Data.DataTable,NetexioFormulaire.Models.AdministrationData>
+@using System.Collections.Generic;
+@using System.Data
 @{
     ViewData["Title"] = "Créer Une Session";
 }
@@ -11,45 +14,47 @@
         <label>Selectionnez la formation</label>
     </div>
 
-    <div class="row">
-        <select name="Formation">
-            <option value="Formation1">Formation 1</option>
-            <option value="Formation2">Formation 2</option>
-            <option value="Formation3">Formation 3</option>
-        </select>
-    </div>
 
-    <div class="row">
-        <label>Date de Début</label>
-    </div>
 
-    <div class="row">
-        <input type="text" />
-    </div>
+    @using (Html.BeginForm("Index", "Administration", FormMethod.Post))
+    {
+        <div class="row">
+            
 
-    <div class="row">
-        <label>Date de Fin</label>
-    </div>
+                @{ List<SelectListItem> listItems = new List<SelectListItem>();
+                     
+                    foreach (DataRow row in Model.Item1.Rows)
+                    {
+                        foreach (DataColumn col in Model.Item1.Columns)
+                        {
+                            listItems.Add( new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
+                        }
+                    }
+                
 
-    <div class="row">
-        <input type="text" />
-    </div>
+                }
+            @Html.DropDownListFor(x=>x.Item2.SelectedFormation, listItems,"Select Formation")
 
-    <div class="row">
-        <label>lieu</label>
-    </div>
+        </div>
+        <div class="row">
+            <label>Date de Début</label>
+            @Html.TextBoxFor(x => x.Item2.BeginDate)
+        </div>
+        <div class="row">
+            <label>Date de Fin</label>
+            @Html.TextBoxFor(x => x.Item2.EndDate)
+        </div>
+        <div class="row">
+            <label>Lieu</label>
+            @Html.TextBoxFor(x => x.Item2.Location)
+        </div>
+        <div class="row">
+            <label>Formateur</label>
+            @Html.TextBoxFor(x => x.Item2.Trainer)
+        </div>
+        <div class="row">
+            <input type="submit" value="Créer" />
+        </div>
+    }
 
-    <div class="row">
-        <input type="text" />
-    </div>
-
-    <div class="row">
-        <label>Formateur</label>
-    </div>
-
-    <div class="row">
-        <input type="text" />
-    </div>
-
-    <button type="submit">Créer</button>
 </div>

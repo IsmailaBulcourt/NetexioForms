@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model NetexioFormulaire.Models.AdministrationData
 @{
     ViewData["Title"] = "Créer une Formation";
 }
@@ -10,8 +8,9 @@
     <div class="row">
         <label>Nom de la formation</label>
     </div>
-    <div class="row">
-        <input type="text" name="Formation_Name" value="Formation_Name" />
-    </div>
-    <button type="submit">Créer</button>
+    @using (Html.BeginForm("Index","Administration", FormMethod.Post))
+            {
+                @Html.TextBoxFor(m=>m.FormationName)
+                <input type="submit" value="Créer" />
+            }
 </div>

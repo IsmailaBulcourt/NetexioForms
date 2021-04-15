@@ -7,5 +7,10 @@ namespace NetexioFormulaire.Models
 {
     public class FormData
     {
+        public string Name { get; set; }
+        public void GET_Data(object sender , EventArgs e)
+        {
+           
+        }
     }
 }

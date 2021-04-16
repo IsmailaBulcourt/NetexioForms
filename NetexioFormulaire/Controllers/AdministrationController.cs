@@ -25,44 +25,102 @@ namespace NetexioFormulaire.Controllers
             return View(tuple);
         }
 
-        public IActionResult DeleteFormation()
+        public IActionResult DeleteFormation(AdministrationData Data)
         {
-            return View();
+            AdministrationData.Dbconnect();
+            DataTable data = Data.GetFormation();
+            var tuple = new Tuple<DataTable, NetexioFormulaire.Models.AdministrationData>(data, new AdministrationData());
+            return View(tuple);
         }
 
-        public IActionResult DeleteSession()
+        public IActionResult DeleteSession(AdministrationData Data)
         {
-            return View();
+            AdministrationData.Dbconnect();
+            DataTable data = Data.GetSession();
+            var tuple = new Tuple<DataTable, NetexioFormulaire.Models.AdministrationData>(data, new AdministrationData());
+            return View(tuple);
         }
 
-        public IActionResult SetActiveSession()
+        public IActionResult SetActiveSession(AdministrationData Data)
         {
+            AdministrationData.Dbconnect();
+            DataTable data = Data.GetSession();
+            var tuple = new Tuple<DataTable, NetexioFormulaire.Models.AdministrationData>(data, new AdministrationData());
+            return View(tuple);
+        }
+
+        [HttpPost]
+        public IActionResult Index(AdministrationData Data)
+        {
+            string Formationname = Data.FormationName.Replace(" ","_");
+            AdministrationData.Dbconnect();
+            AdministrationData.PostFormation(Formationname);
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index([Bind(Prefix = "Item2")] AdministrationData Data)
+        public IActionResult Createsession([Bind(Prefix = "Item2")] AdministrationData Data)
         {
-            string Formationname = Data.FormationName;
             DateTime Begindate = Data.BeginDate;
             DateTime Enddate = Data.EndDate;
             string location = Data.Location;
             string trainer = Data.Trainer;
-            string Selectedformation =Data.SelectedFormation;
-            string Sessionname = ""+Selectedformation+"-" +Begindate+ "-"+Enddate+"-"+location+"-"+trainer+"";
-            if (Formationname!= null) { 
+            string Selectedformation = Data.SelectedFormation;
+            string Sessionname = "" +Selectedformation+"_"+location+"_"+trainer+"_"+Begindate.ToShortDateString().ToString().Replace("/","_")+"_"+Enddate.ToShortDateString().ToString().Replace("/","_")+"";
             AdministrationData.Dbconnect();
-            AdministrationData.PostFormation(Formationname);
+            AdministrationData.PostSession(Sessionname, Begindate, Enddate, Selectedformation, location, trainer);
+            return View("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Deleteformation([Bind(Prefix = "Item2")] AdministrationData Data)
+        {
+            string formationtoDelete;
+            if (Data.FormationToDelete != null) { 
+             formationtoDelete= Data.FormationToDelete;
             }
             else
             {
-                AdministrationData.Dbconnect();
-                AdministrationData.PostSession(Sessionname,Begindate,Enddate,Selectedformation,location,trainer);
+                formationtoDelete = " ";
             }
-            return View();
+            AdministrationData.Dbconnect();
+            AdministrationData.DeleteFormation(formationtoDelete);
+            return View("Index");
         }
 
-   
+        [HttpPost]
+        public IActionResult Deletesession([Bind(Prefix = "Item2")] AdministrationData Data)
+        {
+            string sessiontoDelete;
+            if (Data.SessionToDelete != null)
+            {
+                sessiontoDelete = Data.SessionToDelete;
+            }
+            else
+            {
+                sessiontoDelete = " ";
+            }
+            AdministrationData.Dbconnect();
+            AdministrationData.DeleteSession(sessiontoDelete);
+            return View("Index");
+        }
+        
+        [HttpPost]
+        public IActionResult SetSessionActive([Bind(Prefix = "Item2")] AdministrationData Data)
+        {
+            string sessiontoActivate;
+            if (Data.SessionToActivate != null)
+            {
+                sessiontoActivate = Data.SessionToActivate;
+            }
+            else
+            {
+                sessiontoActivate = " ";
+            }
+            AdministrationData.Dbconnect();
+            AdministrationData.SetActiveSession(sessiontoActivate);
+            return View("Index");
+        }
     }
 
 }

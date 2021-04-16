@@ -1,192 +1,139 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model Tuple<System.Data.DataTable, NetexioFormulaire.Models.FormData>
+@using System.Collections.Generic;
+@using System.Data
 @{
     ViewData["Title"] = "Formulaire";
 }
 <h1>@ViewData["Title"]</h1>
 <p>Page du formulaire</p>
+@using (Html.BeginForm("Validate", "Forms", FormMethod.Post))
+{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+
+    foreach (DataRow row in Model.Item1.Rows)
+    {
+        foreach (DataColumn col in Model.Item1.Columns)
+        {
+            listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
+        }
+    }
+    List<SelectListItem> selectnotes = new List<SelectListItem>();
+    selectnotes.Add(new SelectListItem { Text = "Mediocre", Value = "Mediocre" });
+    selectnotes.Add(new SelectListItem { Text = "Moyen", Value = "Moyen" });
+    selectnotes.Add(new SelectListItem { Text = "Bon", Value = "Bon" });
+    selectnotes.Add(new SelectListItem { Text = "Excellent", Value = "Excellent" });
+    List<SelectListItem> listrythme = new List<SelectListItem>();
+    listrythme.Add(new SelectListItem { Text = "Trop Lent", Value = "Trop Lent" });
+    listrythme.Add(new SelectListItem { Text = "Satisfaisant", Value = "Satisfaisant" });
+    listrythme.Add(new SelectListItem { Text = "Trop Rapide", Value = "Trop Rapide" });
+    List<SelectListItem> selectnumnotes = new List<SelectListItem>();
+    selectnumnotes.Add(new SelectListItem { Text = "1", Value = "1" });
+    selectnumnotes.Add(new SelectListItem { Text = "2", Value = "2" });
+    selectnumnotes.Add(new SelectListItem { Text = "3", Value = "3" });
+    selectnumnotes.Add(new SelectListItem { Text = "4", Value = "4" });
+    selectnumnotes.Add(new SelectListItem { Text = "5", Value = "5" });
+    selectnumnotes.Add(new SelectListItem { Text = "6", Value = "6" });
+    selectnumnotes.Add(new SelectListItem { Text = "7", Value = "7" });
+    selectnumnotes.Add(new SelectListItem { Text = "8", Value = "8" });
+    selectnumnotes.Add(new SelectListItem { Text = "9", Value = "9" });
+    selectnumnotes.Add(new SelectListItem { Text = "10", Value = "10" });
+
 <div class="container">
     <div class=" row">
-        <div class="col-3">
-            <label>nom</label>
-        </div>
-        <div class="col-12">
-            <input type="text" id="lastname_input" name="lastname_input"/>
-        </div>
+        @Html.Label("Name", "Nom")
+        @Html.TextBoxFor(x => x.Item2.Name)
     </div>
     <div class=" row">
-        <div class="col-3">
-            <label>prénom</label>
-        </div>
-        <div class="col-12">
-            <input type="text" id="name_input" name="name_input"/>
-        </div>
-    </div>
-    <div class=" row">
-        <div class="col-3">
-            <label>Selectionnez la Session</label>
-        </div>
-        <div class="col-12">
-            <select name="Session_Selection">
-                <option value="Session1">Session1</option>
-                <option value="Session2">Session2</option>
-                <option value="Session3">Session3</option>
-            </select>
-        </div>
+        @Html.DropDownListFor(x => x.Item2.SelectedSession, listItems, "Selectionnez La Session")
     </div>
     <div class="container">
+
         <div class="row">
-            <h3>Déroulement du cours</h3>
+            @Html.Label("Deroulement du Cour", "Deroulement du Cour")
         </div>
         <div class=" row">
-            <div class=" col-sm-2">
-                <label>Accueil</label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Mediocre <input type="checkbox" value="mediocre" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Moyen <input type="checkbox" value="moyen" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Bon <input type="checkbox" value="bon" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Excellent <input type="checkbox" value="excellent" /></label>
-            </div>
+            @Html.Label("Accueil", "Accueil")
+            @Html.DropDownListFor(x => x.Item2.NoteAccueil, selectnotes, "Note")
         </div>
 
         <div class=" row">
-            <div class=" col-sm-2">
-                <label>La salle de formation</label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Mediocre <input type="checkbox" value="mediocre" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Moyen <input type="checkbox" value="moyen" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Bon <input type="checkbox" value="bon" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Excellent <input type="checkbox" value="excellent" /></label>
-            </div>
+            @Html.Label("La Salle de Formation", "La Salle de Formation")
+            @Html.DropDownListFor(x => x.Item2.NoteSalle, selectnotes, "Note")
         </div>
 
         <div class=" row">
-            <div class=" col-sm-2">
-                <label>Le Matériel</label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Mediocre <input type="checkbox" value="mediocre" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Moyen <input type="checkbox" value="moyen" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Bon <input type="checkbox" value="bon" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Excellent <input type="checkbox" value="excellent" /></label>
-            </div>
+            @Html.Label("Le Materiel", "Le Materiel")
+            @Html.DropDownListFor(x => x.Item2.NoteMateriel, selectnotes, "Note")
         </div>
 
         <div class=" row">
-            <div class=" col-sm-2">
-                <label>La Restauration</label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Mediocre <input type="checkbox" value="mediocre" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Moyen <input type="checkbox" value="moyen" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Bon <input type="checkbox" value="bon" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Excellent <input type="checkbox" value="excellent" /></label>
-            </div>
+            @Html.Label("La Restauration", "La Restauration")
+            @Html.DropDownListFor(x => x.Item2.NoteRestauration, selectnotes, "Note")
         </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h3>Contenu du cours</h3>
+            @Html.Label("Le Contenu Du Cour", "Le Contenu Du Cour")
         </div>
         <div class=" row">
-            <div class=" col-sm-2">
-                <label>La richesse du contenu du cours</label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Mediocre <input type="checkbox" value="mediocre" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Moyen <input type="checkbox" value="moyen" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Bon <input type="checkbox" value="bon" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Excellent <input type="checkbox" value="excellent" /></label>
-            </div>
+            @Html.Label("La richesse du contenu du cours", "La richesse du contenu du cours")
+            @Html.DropDownListFor(x => x.Item2.NoteContenuCour, selectnotes, "Note")
         </div>
 
         <div class=" row">
-            <div class=" col-sm-2">
-                <label>Le niveau du cours par rapport à mes attentes</label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Mediocre <input type="checkbox" value="mediocre" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Moyen <input type="checkbox" value="moyen" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Bon <input type="checkbox" value="bon" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Excellent <input type="checkbox" value="excellent" /></label>
-            </div>
+            @Html.Label("Le niveau du cours par rapport à mes attentes", " Le niveau du cours par rapport à mes attentes")
+            @Html.DropDownListFor(x => x.Item2.NoteNiveauCour, selectnotes, "Note")
         </div>
 
         <div class=" row">
-            <div class=" col-sm-2">
-                <label>Les supports de cours et les ateliers</label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Mediocre <input type="checkbox" value="mediocre" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Moyen <input type="checkbox" value="moyen" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Bon <input type="checkbox" value="bon" /></label>
-            </div>
-            <div class=" col-sm-2">
-                <label>Excellent <input type="checkbox" value="excellent" /></label>
-            </div>
+            @Html.Label("Les supports de cours et les ateliers", "Les supports de cours et les ateliers")
+            @Html.DropDownListFor(x => x.Item2.NoteSupportCour, selectnotes, "Note")
         </div>
 
     </div>
 
     <div class="container">
         <div class="row">
-            <h3>Le Rythme de Progression</h3>
-        </div>
-        <div clas="col-sm-2">
-            <label>Trop Lent <input type="checkbox" value="trop lent" /></label>
-        </div>
-        <div clas="col-sm-2">
-            <label>Satisfaiant <input type="checkbox" value="satisfaisant" /></label>
-        </div>
-        <div clas="col-sm-2">
-            <label>Trop Rapide <input type="checkbox" value="trop rapide" /></label>
+            @Html.Label("Le Rythme de Progression", "Le Rythme de Progression")
+            @Html.DropDownListFor(x => x.Item2.NoteRythme, listrythme, "Rythme")
         </div>
     </div>
-    <a href='@Url.Action("FormsPage2","Forms")'>
-        <input type="button" value="suivant" />
-    </a>
+    <div class="container">
+
+        <div class="row">
+            @Html.Label("Le Formateur", "Le Formateur")
+        </div>
+        <div class="row">
+            @Html.Label("Maitrise du sujet", "Maitrise du sujet")
+            @Html.DropDownListFor(x => x.Item2.NoteMaitrise, selectnumnotes, "note")
+
+        </div>
+
+        <div class="row">
+            @Html.Label("Qualités de communication et pédagogie", "Qualités de communication et pédagogie")
+            @Html.DropDownListFor(x => x.Item2.NoteCommEtPedagogie, selectnumnotes, "note")
+        </div>
+
+        <div class="row">
+            @Html.Label("Ecoute et disponibilité", "Ecoute et disponibilité")
+            @Html.DropDownListFor(x => x.Item2.NoteDispo, selectnumnotes, "note")
+        </div>
+
+        <div class="row">
+            @Html.Label("Formations", "Aimeriez vous participer à d'autres formations? si oui merci de nous lister les thèmes")
+            @Html.TextBoxFor(x => x.Item2.FormationsSouhaites)
+        </div>
+        <div class="row">
+            @Html.Label("Commentaire", "Commentaires Généraux")
+            @Html.TextBoxFor(x => x.Item2.Commentaires)
+        </div>
+    </div>
+    <div class="row">
+        <input type="submit" value="Valider" />
+    </div>
 </div>
+}

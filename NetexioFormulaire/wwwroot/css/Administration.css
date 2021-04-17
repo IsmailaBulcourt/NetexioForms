@@ -1,0 +1,46 @@
+﻿#Forms {
+    padding: 10px;
+    width: 800px;
+    border: 5px groove #105209;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+#container {
+    padding: 0 20px 20px 20px;
+    margin-bottom: 10px;
+    border: 5px groove lightslategray;
+    background-color: #105209;
+    text-align: center;
+}
+#Label {
+    margin-top: 10px;
+    display: block;
+    text-shadow: 1px 1px 1px black;
+    font-family: 'Times New Roman', Times, serif;
+}
+#Textbox {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 35%;
+}
+#DropdownList-Session {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10%;
+}
+#DropdownList {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 44%;
+}
+#Submit_button {
+    margin-left: 45%;
+    width: 100px;
+    box-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    border: groove;
+    background-color: #b5ef9a;
+}
+body {
+}

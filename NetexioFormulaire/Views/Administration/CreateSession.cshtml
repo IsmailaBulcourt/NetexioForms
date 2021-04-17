@@ -7,54 +7,66 @@
 @{
     ViewData["Title"] = "Créer Une Session";
 }
-<h1>@ViewData["Title"]</h1>
-<p>Page de création de session</p>
-<div class=" container">
-    <div class="row">
-        <label>Selectionnez la formation</label>
-    </div>
+<head>
+    <link rel="stylesheet" href="~/css/Administration.css" />
+    <title>@ViewData["Title"] - NetexioFormulaire</title>
+</head>
+<div class="container" id="Forms">
+    <div class=" container" id="container">
+        <div class="row" id="Label">
+            @Html.Label("Name", "Selectionnez la formation")
+        </div>
 
 
 
-    @using (Html.BeginForm("Createsession", "Administration", FormMethod.Post))
-    {
-        <div class="row">
-            
+        @using (Html.BeginForm("Createsession", "Administration", FormMethod.Post))
+        {
+            <div class="row" id="DropdownList-Session">
+
 
                 @{ List<SelectListItem> listItems = new List<SelectListItem>();
-                     
+
                     foreach (DataRow row in Model.Item1.Rows)
                     {
                         foreach (DataColumn col in Model.Item1.Columns)
                         {
-                            listItems.Add( new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
+                            listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
                         }
                     }
-                
+
 
                 }
-            @Html.DropDownListFor(x=>x.Item2.SelectedFormation, listItems,"Select Formation")
+                @Html.DropDownListFor(x => x.Item2.SelectedFormation, listItems, "Select Formation")
 
-        </div>
-        <div class="row">
-            <label>Date de Début</label>
-            @Html.TextBoxFor(x => x.Item2.BeginDate)
-        </div>
-        <div class="row">
-            <label>Date de Fin</label>
-            @Html.TextBoxFor(x => x.Item2.EndDate)
-        </div>
-        <div class="row">
-            <label>Lieu</label>
-            @Html.TextBoxFor(x => x.Item2.Location)
-        </div>
-        <div class="row">
-            <label>Formateur</label>
-            @Html.TextBoxFor(x => x.Item2.Trainer)
-        </div>
-        <div class="row">
-            <input type="submit" value="Créer" />
-        </div>
-    }
+            </div>
+            <div class="row" id="Label">
+                @Html.Label("BeginDate", "Date de Début")
+            </div>
+            <div class="row" id="Textbox">
+                @Html.TextBoxFor(x => x.Item2.BeginDate)
+            </div>
+            <div class="row" id="Label">
+                @Html.Label("EndDate", "Date de Fin")
+            </div>
+            <div class="row" id="Textbox">
+                @Html.TextBoxFor(x => x.Item2.EndDate)
+            </div>
+            <div class="row" id="Label">
+                @Html.Label("Location", "Lieu")
+            </div>
+            <div class="row" id="Textbox">
+                @Html.TextBoxFor(x => x.Item2.Location)
+            </div>
+            <div class="row" id="Label">
+                @Html.Label("Trainer", "Formateur")
+            </div>
+            <div class="row" id="Textbox">
+                @Html.TextBoxFor(x => x.Item2.Trainer)
+            </div>
+            <div class="row">
+                <input type="submit" value="Créer" id="Submit_button" />
+            </div>
+        }
 
+    </div>
 </div>

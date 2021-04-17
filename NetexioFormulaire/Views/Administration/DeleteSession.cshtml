@@ -7,30 +7,34 @@
 @{
     ViewData["Title"] = "Supprimer une session";
 }
-<h1>@ViewData["Title"]</h1>
-<p>Page de suppression d'une session</p>
-<div class="container">
-    <div class="row">
-        <label>Nom de la Session</label>
-    </div>
-    @using (Html.BeginForm("Deletesession", "Administration", FormMethod.Post))
-    {
-        <div class="row">
-            @{ List<SelectListItem> listItems = new List<SelectListItem>();
+<head>
+    <link rel="stylesheet" href="~/css/Administration.css" />
+    <title>@ViewData["Title"] - NetexioFormulaire</title>
+</head>
+<div class="container" id="Forms">
+    <div class="container" id="container">
+        <div class="row" id="Label">
+            < @Html.Label("Name", "Nom de la Session")
+        </div>
+        @using (Html.BeginForm("Deletesession", "Administration", FormMethod.Post))
+        {
+            <div class="row" id="DropdownList-Session">
+                @{ List<SelectListItem> listItems = new List<SelectListItem>();
 
-                foreach (DataRow row in Model.Item1.Rows)
-                {
-                    foreach (DataColumn col in Model.Item1.Columns)
+                    foreach (DataRow row in Model.Item1.Rows)
                     {
-                        listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
+                        foreach (DataColumn col in Model.Item1.Columns)
+                        {
+                            listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
+                        }
                     }
                 }
-            }
-            @Html.DropDownListFor(x => x.Item2.SessionToDelete, listItems, new { @class = "form-control" })
-        </div>
-        <div class="row">
-            <input type="submit" value="Supprimer" />
-        </div>
+                @Html.DropDownListFor(x => x.Item2.SessionToDelete, listItems, new { @class = "form-control" })
+            </div>
+            <div class="row">
+                <input type="submit" value="Supprimer" id="Submit_button" />
+            </div>
 
-    }
+        }
+    </div>
 </div>

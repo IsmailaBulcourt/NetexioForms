@@ -7,133 +7,167 @@
 @{
     ViewData["Title"] = "Formulaire";
 }
-<h1>@ViewData["Title"]</h1>
-<p>Page du formulaire</p>
-@using (Html.BeginForm("Validate", "Forms", FormMethod.Post))
-{
-    List<SelectListItem> listItems = new List<SelectListItem>();
-
-    foreach (DataRow row in Model.Item1.Rows)
+<head>
+    <link rel="stylesheet" href="~/css/Formulaire.css" />
+    <title>@ViewData["Title"] - NetexioFormulaire</title>
+</head>
+<body>
+    @using (Html.BeginForm("Validate", "Forms", FormMethod.Post))
     {
-        foreach (DataColumn col in Model.Item1.Columns)
+        List<SelectListItem> listItems = new List<SelectListItem>();
+
+        foreach (DataRow row in Model.Item1.Rows)
         {
-            listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
+            foreach (DataColumn col in Model.Item1.Columns)
+            {
+                listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
+            }
         }
-    }
-    List<SelectListItem> selectnotes = new List<SelectListItem>();
-    selectnotes.Add(new SelectListItem { Text = "Mediocre", Value = "Mediocre" });
-    selectnotes.Add(new SelectListItem { Text = "Moyen", Value = "Moyen" });
-    selectnotes.Add(new SelectListItem { Text = "Bon", Value = "Bon" });
-    selectnotes.Add(new SelectListItem { Text = "Excellent", Value = "Excellent" });
-    List<SelectListItem> listrythme = new List<SelectListItem>();
-    listrythme.Add(new SelectListItem { Text = "Trop Lent", Value = "Trop Lent" });
-    listrythme.Add(new SelectListItem { Text = "Satisfaisant", Value = "Satisfaisant" });
-    listrythme.Add(new SelectListItem { Text = "Trop Rapide", Value = "Trop Rapide" });
-    List<SelectListItem> selectnumnotes = new List<SelectListItem>();
-    selectnumnotes.Add(new SelectListItem { Text = "1", Value = "1" });
-    selectnumnotes.Add(new SelectListItem { Text = "2", Value = "2" });
-    selectnumnotes.Add(new SelectListItem { Text = "3", Value = "3" });
-    selectnumnotes.Add(new SelectListItem { Text = "4", Value = "4" });
-    selectnumnotes.Add(new SelectListItem { Text = "5", Value = "5" });
-    selectnumnotes.Add(new SelectListItem { Text = "6", Value = "6" });
-    selectnumnotes.Add(new SelectListItem { Text = "7", Value = "7" });
-    selectnumnotes.Add(new SelectListItem { Text = "8", Value = "8" });
-    selectnumnotes.Add(new SelectListItem { Text = "9", Value = "9" });
-    selectnumnotes.Add(new SelectListItem { Text = "10", Value = "10" });
+        List<SelectListItem> selectnotes = new List<SelectListItem>();
+        selectnotes.Add(new SelectListItem { Text = "Mediocre", Value = "Mediocre" });
+        selectnotes.Add(new SelectListItem { Text = "Moyen", Value = "Moyen" });
+        selectnotes.Add(new SelectListItem { Text = "Bon", Value = "Bon" });
+        selectnotes.Add(new SelectListItem { Text = "Excellent", Value = "Excellent" });
+        List<SelectListItem> listrythme = new List<SelectListItem>();
+        listrythme.Add(new SelectListItem { Text = "Trop Lent", Value = "Trop Lent" });
+        listrythme.Add(new SelectListItem { Text = "Satisfaisant", Value = "Satisfaisant" });
+        listrythme.Add(new SelectListItem { Text = "Trop Rapide", Value = "Trop Rapide" });
+        List<SelectListItem> selectnumnotes = new List<SelectListItem>();
+        selectnumnotes.Add(new SelectListItem { Text = "1", Value = "1" });
+        selectnumnotes.Add(new SelectListItem { Text = "2", Value = "2" });
+        selectnumnotes.Add(new SelectListItem { Text = "3", Value = "3" });
+        selectnumnotes.Add(new SelectListItem { Text = "4", Value = "4" });
+        selectnumnotes.Add(new SelectListItem { Text = "5", Value = "5" });
+        selectnumnotes.Add(new SelectListItem { Text = "6", Value = "6" });
+        selectnumnotes.Add(new SelectListItem { Text = "7", Value = "7" });
+        selectnumnotes.Add(new SelectListItem { Text = "8", Value = "8" });
+        selectnumnotes.Add(new SelectListItem { Text = "9", Value = "9" });
+        selectnumnotes.Add(new SelectListItem { Text = "10", Value = "10" });
 
-<div class="container">
-    <div class=" row">
-        @Html.Label("Name", "Nom")
-        @Html.TextBoxFor(x => x.Item2.Name)
-    </div>
-    <div class=" row">
-        @Html.DropDownListFor(x => x.Item2.SelectedSession, listItems, "Selectionnez La Session")
-    </div>
-    <div class="container">
+    <div class="container" id="Forms">
+        <div class="container" id="Informations">
+            <div class=" row" id="Label">
+                @Html.Label("Name", "Nom")
+            </div>
+            <div class=" row" id="Textbox"   >
+                @Html.TextBoxFor(x => x.Item2.Name, new { @class ="Form-Control", style="text-align: center; ",value="Selectionnez La Session" })
+            </div>
+            <div class=" row" id="DropdownList-Session">
+                @Html.DropDownListFor(x => x.Item2.SelectedSession, listItems,new { @class ="Form-Control", style="text-align: center; ",value="Selectionnez La Session" })
+            </div>
+        </div>
+           <div class="container" id="DeroulCour">
 
-        <div class="row">
-            @Html.Label("Deroulement du Cour", "Deroulement du Cour")
-        </div>
-        <div class=" row">
-            @Html.Label("Accueil", "Accueil")
-            @Html.DropDownListFor(x => x.Item2.NoteAccueil, selectnotes, "Note")
-        </div>
+                <div class="row" id="Titre-Container">
+                    @Html.Label("Deroulement du Cour", "Deroulement du Cour")
+                </div>
+                <div class=" row" id="Label">
+                    @Html.Label("Accueil", "Accueil")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteAccueil, selectnotes, "Note")
+                </div>
+                <div class=" row" id="Label">
+                    @Html.Label("La Salle de Formation", "La Salle de Formation")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteSalle, selectnotes, "Note")
+                </div>
 
-        <div class=" row">
-            @Html.Label("La Salle de Formation", "La Salle de Formation")
-            @Html.DropDownListFor(x => x.Item2.NoteSalle, selectnotes, "Note")
-        </div>
+                <div class=" row" id="Label">
+                    @Html.Label("Le Materiel", "Le Materiel")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteMateriel, selectnotes, "Note")
+                </div>
 
-        <div class=" row">
-            @Html.Label("Le Materiel", "Le Materiel")
-            @Html.DropDownListFor(x => x.Item2.NoteMateriel, selectnotes, "Note")
-        </div>
+                <div class=" row" id="Label" >
+                    @Html.Label("La Restauration", "La Restauration")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteRestauration, selectnotes, "Note")
+                </div>
+            </div>
 
-        <div class=" row">
-            @Html.Label("La Restauration", "La Restauration")
-            @Html.DropDownListFor(x => x.Item2.NoteRestauration, selectnotes, "Note")
-        </div>
-    </div>
+            <div class="container" id="ContenuCour">
+                <div class="row" id="Titre-Container">
+                    @Html.Label("Le Contenu Du Cour", "Le Contenu Du Cour")
+                </div>
+                <div class=" row" id="Label">
+                    @Html.Label("La richesse du contenu du cours", "La richesse du contenu du cours")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteContenuCour, selectnotes, "Note")
+                </div>
 
-    <div class="container">
-        <div class="row">
-            @Html.Label("Le Contenu Du Cour", "Le Contenu Du Cour")
-        </div>
-        <div class=" row">
-            @Html.Label("La richesse du contenu du cours", "La richesse du contenu du cours")
-            @Html.DropDownListFor(x => x.Item2.NoteContenuCour, selectnotes, "Note")
-        </div>
+                <div class="row" id="Label">
+                    @Html.Label("Le niveau du cours par rapport à mes attentes", " Le niveau du cours par rapport à mes attentes")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteNiveauCour, selectnotes, "Note")
+                </div>
 
-        <div class=" row">
-            @Html.Label("Le niveau du cours par rapport à mes attentes", " Le niveau du cours par rapport à mes attentes")
-            @Html.DropDownListFor(x => x.Item2.NoteNiveauCour, selectnotes, "Note")
-        </div>
+                <div class=" row" id="Label">
+                    @Html.Label("Les supports de cours et les ateliers", "Les supports de cours et les ateliers")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteSupportCour, selectnotes, "Note")
+                </div>
 
-        <div class=" row">
-            @Html.Label("Les supports de cours et les ateliers", "Les supports de cours et les ateliers")
-            @Html.DropDownListFor(x => x.Item2.NoteSupportCour, selectnotes, "Note")
-        </div>
+                <div class="row" id="Label">
+                    @Html.Label("Le Rythme de Progression", "Le Rythme de Progression")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteRythme, listrythme, "Rythme")
+                </div>
 
-    </div>
+            </div>
 
-    <div class="container">
-        <div class="row">
-            @Html.Label("Le Rythme de Progression", "Le Rythme de Progression")
-            @Html.DropDownListFor(x => x.Item2.NoteRythme, listrythme, "Rythme")
-        </div>
-    </div>
-    <div class="container">
 
-        <div class="row">
-            @Html.Label("Le Formateur", "Le Formateur")
-        </div>
-        <div class="row">
-            @Html.Label("Maitrise du sujet", "Maitrise du sujet")
-            @Html.DropDownListFor(x => x.Item2.NoteMaitrise, selectnumnotes, "note")
 
-        </div>
+            <div class="container" id="Formateur">
 
-        <div class="row">
-            @Html.Label("Qualités de communication et pédagogie", "Qualités de communication et pédagogie")
-            @Html.DropDownListFor(x => x.Item2.NoteCommEtPedagogie, selectnumnotes, "note")
-        </div>
+                <div class="row" id="Titre-Container">
+                    @Html.Label("Le Formateur", "Le Formateur")
+                </div>
+                <div class="row" id="Label">
+                    @Html.Label("Maitrise du sujet", "Maitrise du sujet")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteMaitrise, selectnumnotes, "note")
 
-        <div class="row">
-            @Html.Label("Ecoute et disponibilité", "Ecoute et disponibilité")
-            @Html.DropDownListFor(x => x.Item2.NoteDispo, selectnumnotes, "note")
-        </div>
+                </div>
 
-        <div class="row">
-            @Html.Label("Formations", "Aimeriez vous participer à d'autres formations? si oui merci de nous lister les thèmes")
-            @Html.TextBoxFor(x => x.Item2.FormationsSouhaites)
+                <div class="row" id="Label">
+                    @Html.Label("Qualités de communication et pédagogie", "Qualités de communication et pédagogie")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteCommEtPedagogie, selectnumnotes, "note")
+                </div>
+
+                <div class="row" id="Label">
+                    @Html.Label("Ecoute et disponibilité", "Ecoute et disponibilité")
+                </div>
+                <div class=" row" id="DropdownList">
+                    @Html.DropDownListFor(x => x.Item2.NoteDispo, selectnumnotes, "note")
+                </div>
+
+                <div class="row" id="Label">
+                    @Html.Label("Formations", "Aimeriez vous participer à d'autres formations? si oui merci de nous lister les thèmes")
+                </div>
+                <div class=" row" id="Textbox">
+                    @Html.TextBoxFor(x => x.Item2.FormationsSouhaites)
+                </div>
+                <div class="row" id="Label">
+                    @Html.Label("Commentaire", "Commentaires Généraux")
+                </div>
+                <div class=" row" id="Textbox">
+                    @Html.TextBoxFor(x => x.Item2.Commentaires)
+                </div>
+            </div>
+            <div class="row" id="Submit_button_div">
+                <input type="submit" value="Valider"  id="Submit_button"/>
+            </div>
         </div>
-        <div class="row">
-            @Html.Label("Commentaire", "Commentaires Généraux")
-            @Html.TextBoxFor(x => x.Item2.Commentaires)
-        </div>
-    </div>
-    <div class="row">
-        <input type="submit" value="Valider" />
-    </div>
-</div>
-}
+        }
+</body>

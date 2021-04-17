@@ -2,15 +2,24 @@
 @{
     ViewData["Title"] = "Créer une Formation";
 }
-<h1>@ViewData["Title"]</h1>
-<p>Page de création de formation</p>
-<div class="container">
-    <div class="row">
-        <label>Nom de la formation</label>
-    </div>
-    @using (Html.BeginForm("Index","Administration", FormMethod.Post))
-            {
-                @Html.TextBoxFor(m=>m.FormationName)
-                <input type="submit" value="Créer" />
-            }
+<<head>
+    <link rel="stylesheet" href="~/css/Administration.css"/>
+    <title>@ViewData["Title"] - NetexioFormulaire</title>
+</head>
+ <div class="container" id="Forms">
+     <div class="container" id="container">
+         <div class="row" id="Label">
+             @Html.Label("Name", "Nom de la Formation")
+         </div>
+
+         @using (Html.BeginForm("Index", "Administration", FormMethod.Post))
+         {
+             <div class="row" id="Textbox">
+                 @Html.TextBoxFor(m => m.FormationName)
+             </div>
+             <div class="row">
+                 <input type="submit" value="Créer" id="Submit_button" />
+             </div>
+         }
+     </div>
 </div>

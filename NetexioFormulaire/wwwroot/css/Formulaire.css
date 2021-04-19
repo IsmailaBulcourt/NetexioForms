@@ -10,8 +10,8 @@
 #Informations {
     padding: 0 20px 20px 20px;
     margin-bottom: 10px;
-    border: 5px groove lightslategray;
-    background-color: #105209;
+    border: 5px groove white;
+    background-color: lightslategray;
     text-align: center;
 }
 
@@ -19,21 +19,20 @@
     padding: 0 20px 20px 20px;
     margin-bottom: 10px;
     border: 5px groove white;
-    background-color: #105209;
+    background-color: gray;
 }
 #ContenuCour {
     padding: 0 20px 20px 20px;
     margin-bottom: 10px;
     border: 5px groove white;
-    background-color: #105209;
-    
+    background-color: gray;
 }
 
 #Formateur {
     padding: 0 20px 20px 20px;
     margin-bottom: 10px;
     border: 5px groove white;
-    background-color: #105209;
+    background-color:gray;
 }
 
 #Titre-Container {

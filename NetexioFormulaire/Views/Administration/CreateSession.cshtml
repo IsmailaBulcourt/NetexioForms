@@ -21,24 +21,24 @@
 
         @using (Html.BeginForm("Createsession", "Administration", FormMethod.Post))
         {
-            <div class="row" id="DropdownList-Session">
+    <div class="row" id="DropdownList-DF">
 
 
-                @{ List<SelectListItem> listItems = new List<SelectListItem>();
+        @{ List<SelectListItem> listItems = new List<SelectListItem>();
 
-                    foreach (DataRow row in Model.Item1.Rows)
-                    {
-                        foreach (DataColumn col in Model.Item1.Columns)
-                        {
-                            listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
-                        }
-                    }
-
-
+            foreach (DataRow row in Model.Item1.Rows)
+            {
+                foreach (DataColumn col in Model.Item1.Columns)
+                {
+                    listItems.Add(new SelectListItem { Text = row[col.ColumnName].ToString(), Value = row[col.ColumnName].ToString() });
                 }
-                @Html.DropDownListFor(x => x.Item2.SelectedFormation, listItems, "Select Formation")
+            }
 
-            </div>
+
+        }
+        @Html.DropDownListFor(x => x.Item2.SelectedFormation, listItems, new { @class = "form-control" })
+
+    </div>
             <div class="row" id="Label">
                 @Html.Label("BeginDate", "Date de Début")
             </div>

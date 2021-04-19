@@ -39,7 +39,7 @@ namespace NetexioFormulaire.Models
 
         public DataTable GetSession()
         {
-            string cdmText = "SELECT Nom FROM Sessions";
+            string cdmText = "SELECT Nom FROM Sessions WHERE IsActive = 1";
             SqlCommand getsession = new SqlCommand(cdmText, Dbconnect());
             SqlDataAdapter sqlData = new SqlDataAdapter(getsession);
             DataTable dt = new DataTable();

@@ -53,7 +53,7 @@
                 @Html.TextBoxFor(x => x.Item2.Name, new { @class ="Form-Control", style="text-align: center; ",value="Selectionnez La Session" })
             </div>
             <div class=" row" id="DropdownList-Session">
-                @Html.DropDownListFor(x => x.Item2.SelectedSession, listItems,new { @class ="Form-Control", style="text-align: center; ",value="Selectionnez La Session" })
+                @Html.DropDownListFor(x => x.Item2.SelectedSession, listItems,"Selectionnez La Session", new { @class = "Form-Control" })
             </div>
         </div>
            <div class="container" id="DeroulCour">

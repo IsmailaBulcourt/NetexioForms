@@ -18,7 +18,7 @@
         </div>
         @using (Html.BeginForm("Deleteformation", "Administration", FormMethod.Post))
         {
-            <div class="row" id="DropdownList">
+            <div class="row" id="DropdownList-DF">
                 @{ List<SelectListItem> listItems = new List<SelectListItem>();
 
                     foreach (DataRow row in Model.Item1.Rows)
